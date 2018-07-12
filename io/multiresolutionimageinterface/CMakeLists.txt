@@ -85,6 +85,11 @@ ELSE(BUILD_MULTIRESOLUTIONIMAGEINTERFACE_VSI_SUPPORT)
 ADD_LIBRARY(multiresolutionimageinterface SHARED ${MULTIRESOLUTIONIMAGEINTERFACE_SRCS} ${MULTIRESOLUTIONIMAGEINTERFACE_HS})
 TARGET_LINK_LIBRARIES(multiresolutionimageinterface PRIVATE libtiff zlib core libjasper libjpeg Boost::disable_autolinking Boost::thread)
 ENDIF(BUILD_MULTIRESOLUTIONIMAGEINTERFACE_VSI_SUPPORT)
+SET_TARGET_PROPERTIES(multiresolutionimageinterface PROPERTIES
+                      RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin
+					  RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin
+					  DEBUG_POSTFIX "d"
+					  )
 
 generate_export_header(multiresolutionimageinterface)
 SET_TARGET_PROPERTIES(multiresolutionimageinterface PROPERTIES DEBUG_POSTFIX _d)
@@ -99,7 +104,11 @@ target_include_directories(
 ADD_LIBRARY(openslidefileformat SHARED ${EXTERNAL_OPENSLIDE_SRCS} ${EXTERNAL_OPENSLIDE_HS})
 generate_export_header(openslidefileformat)
 TARGET_LINK_LIBRARIES(openslidefileformat PRIVATE ${OPENSLIDE_LIBRARY} multiresolutionimageinterface core Boost::disable_autolinking Boost::thread)
-SET_TARGET_PROPERTIES(openslidefileformat PROPERTIES DEBUG_POSTFIX _d)
+SET_TARGET_PROPERTIES(openslidefileformat PROPERTIES
+                      RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin
+					  RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin
+					  DEBUG_POSTFIX "d"
+					  )
 
 IF(WIN32)  
   SET_TARGET_PROPERTIES(multiresolutionimageinterface PROPERTIES FOLDER pathology/diag/io)    

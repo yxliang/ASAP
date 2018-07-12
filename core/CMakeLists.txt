@@ -11,7 +11,12 @@ target_include_directories(core PRIVATE ${CORE_SOURCE_DIR} ${DIAGPathology_SOURC
 
 target_compile_features(core PRIVATE cxx_generalized_initializers)
 
-SET_TARGET_PROPERTIES(core PROPERTIES DEBUG_POSTFIX _d)
+SET_TARGET_PROPERTIES(core PROPERTIES
+                      RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin
+					  RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin
+					  DEBUG_POSTFIX "d"
+					  )
+
 IF(WIN32)  
   SET_TARGET_PROPERTIES(core PROPERTIES FOLDER diag)    
 ENDIF(WIN32)

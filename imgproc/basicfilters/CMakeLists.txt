@@ -24,7 +24,11 @@ TARGET_INCLUDE_DIRECTORIES(
 TARGET_LINK_LIBRARIES(basicfilters multiresolutionimageinterface core)
 generate_export_header(basicfilters)
 
-SET_TARGET_PROPERTIES(basicfilters PROPERTIES DEBUG_POSTFIX _d)
+SET_TARGET_PROPERTIES(basicfilters PROPERTIES
+                      RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin
+					  RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin
+					  DEBUG_POSTFIX "d"
+					  )
 IF(WIN32)  
   SET_TARGET_PROPERTIES(basicfilters PROPERTIES FOLDER pathology/diag/imgproc)    
 ENDIF(WIN32)

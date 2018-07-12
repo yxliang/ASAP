@@ -37,17 +37,48 @@ if (WIN32)
 	add_definitions(${DEFAULT_COMPILE_DEFINITIONS})
 endif()
 
+# 3rd lib
+set(3rdlib_DIR "D:/caffe-builder/build/libraries")
+
+set( BOOST_ROOT ${3rdlib_DIR} CACHE PATH "")
+set( BOOST_INCLUDEDIR ${BOOST_ROOT}/include/boost-1_61 CACHE PATH "")
+set( BOOST_LIBRARYDIR ${BOOST_ROOT}/lib CACHE PATH "")
+set( Boost_USE_MULTITHREADED ON CACHE BOOL "")
+set( Boost_USE_STATIC_LIBS ON CACHE BOOL "")
+set( Boost_USE_STATIC_RUNTIME OFF CACHE BOOL "")
+# set( BOOST_ROOT "D:/libraries/boost_1_67_0" CACHE PATH "")
+# set( BOOST_INCLUDEDIR ${BOOST_ROOT}/boost CACHE PATH "")
+# set( BOOST_LIBRARYDIR ${BOOST_ROOT}/lib64-msvc-14 CACHE PATH "")
+# set( Boost_USE_MULTITHREADED ON CACHE BOOL "")
+# set( Boost_USE_STATIC_LIBS OFF CACHE BOOL "")
+
+set( ZLIB_INCLUDE_DIR ${3rdlib_DIR}/include)
+set( ZLIB_LIBRARY ${3rdlib_DIR}/lib/zlibstatic.lib)
+set( TIFF_LIBRARY ${3rdlib_DIR}/x64/vc14/staticlib/libtiff.lib)
+set( JPEG_INCLUDE_DIR "c:/Program Files/libjpeg-turbo64/include" )
+set( JPEG_LIBRARY "c:/Program Files/libjpeg-turbo64/lib/jpeg-static.lib" )
+set( JASPER_INCLUDE_DIR "c:/Program Files/JasPer/include" )
+# set( JASPER_LIBRARY "c:/Program Files/JasPer/lib/jasper.lib" )
+set( JASPER_LIBRARIES "c:/Program Files/JasPer/lib/jasper.lib" )
+set( OPENSLIDE_INCLUDE_DIR "D:/libraries/openslide-win64-20171122/include/openslide" )
+set( OPENSLIDE_LIBRARY  "D:/libraries/openslide-win64-20171122/lib/libopenslide.lib")
+set( OpenCV_DIR  ${3rdlib_DIR})
+set( SWIG_DIR  "D:/libraries/swigwin-3.0.12")
+set( SWIG_EXECUTABLE  ${SWIG_DIR}/swig.exe)
+
+FIND_PACKAGE( OpenCV REQUIRED )
+
 # Use boost for cross-platform use of threading, file system and date_time handling
 FIND_PACKAGE(Boost QUIET REQUIRED COMPONENTS date_time filesystem program_options regex system thread)
 
-# Jasper for JPEG2000 codec
-FIND_PACKAGE(Jasper REQUIRED)
+# # Jasper for JPEG2000 codec
+# FIND_PACKAGE(Jasper REQUIRED)
 
 # TIFF is the main multi-tiled format used in this package
 FIND_PACKAGE(TIFF REQUIRED)
 
-# JPEG for the codecs
-FIND_PACKAGE(JPEG REQUIRED)
+# # JPEG for the codecs
+# FIND_PACKAGE(JPEG REQUIRED)
 
 # ZLIB for codec support
 FIND_PACKAGE(ZLIB REQUIRED)
@@ -55,11 +86,11 @@ FIND_PACKAGE(ZLIB REQUIRED)
 # PugiXML required for LIF file format and reading/writing annotations
 FIND_PACKAGE(PugiXML REQUIRED)
 
-ADD_LIBRARY(libtiff STATIC IMPORTED)
-SET_PROPERTY(TARGET libtiff PROPERTY IMPORTED_LOCATION ${TIFF_LIBRARY})
+# ADD_LIBRARY(libtiff STATIC IMPORTED)
+# SET_PROPERTY(TARGET libtiff PROPERTY IMPORTED_LOCATION ${TIFF_LIBRARY})
 
-ADD_LIBRARY(libjasper STATIC IMPORTED)
-SET_PROPERTY(TARGET libjasper PROPERTY IMPORTED_LOCATION ${JASPER_LIBRARY})
+# ADD_LIBRARY(libjasper STATIC IMPORTED)
+# SET_PROPERTY(TARGET libjasper PROPERTY IMPORTED_LOCATION ${JASPER_LIBRARY})
 
 ADD_LIBRARY(libjpeg STATIC IMPORTED)
 SET_PROPERTY(TARGET libjpeg PROPERTY IMPORTED_LOCATION ${JPEG_LIBRARY})
@@ -71,14 +102,14 @@ SET_PROPERTY(TARGET zlib PROPERTY IMPORTED_LOCATION ${ZLIB_LIBRARY})
 FIND_PACKAGE(OPENSLIDE REQUIRED)
 
 # Build options for the pathology projects
-OPTION(BUILD_DIAG_PATHOLOGY_EXECUTABLES "Builds executables" OFF)
-OPTION(BUILD_DIAG_PATHOLOGY_WORKSTATION "Builds workstation" OFF)
-OPTION(BUILD_DIAG_PATHOLOGY_IMAGEPROCESSING "Builds image processing routines" OFF)
+OPTION(BUILD_DIAG_PATHOLOGY_EXECUTABLES "Builds executables" ON)
+OPTION(BUILD_DIAG_PATHOLOGY_WORKSTATION "Builds workstation" ON)
+OPTION(BUILD_DIAG_PATHOLOGY_IMAGEPROCESSING "Builds image processing routines" ON)
 OPTION(BUILD_DIAG_PATHOLOGY_TESTS "Builds tests" OFF)
-OPTION(PACKAGE_ON_INSTALL "Copies dependent DLLs and packages install" OFF)
+OPTION(PACKAGE_ON_INSTALL "Copies dependent DLLs and packages install" ON)
 
 IF(BUILD_DIAG_PATHOLOGY_IMAGEPROCESSING)
-  SET(OpenCV_STATIC OFF)
+  # SET(OpenCV_STATIC OFF)
   FIND_PACKAGE(OpenCV QUIET)
 ENDIF()
 

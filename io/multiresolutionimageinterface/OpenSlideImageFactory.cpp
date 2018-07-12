@@ -5,25 +5,25 @@ OpenSlideImageFactory::OpenSlideImageFactory() : MultiResolutionImageFactory("Op
 }
 
 MultiResolutionImage* OpenSlideImageFactory::readImage(const std::string& fileName) const {
-  OpenSlideImage* img = new OpenSlideImage();
-  img->initialize(fileName);
-  if (img->valid()) {
-    return img;
-  }
-  else {
-    delete img;
-    return NULL;
-  }
+	OpenSlideImage* img = new OpenSlideImage();
+	img->initialize(fileName);
+	if (img->valid()) {
+		return img;
+	}
+	else {
+		delete img;
+		return NULL;
+	}
 }
 
 bool OpenSlideImageFactory::canReadImage(const std::string& fileName) const {
-  OpenSlideImage* img = new OpenSlideImage();
-  bool canOpen = img->initialize(fileName);
-  delete img;
-  return canOpen;
+	OpenSlideImage* img = new OpenSlideImage();
+	bool canOpen = img->initialize(fileName);
+	delete img;
+	return canOpen;
 }
 
 void filetypeLoad()
 {
-  static OpenSlideImageFactory filetypeFactory;
+	static OpenSlideImageFactory filetypeFactory;
 }

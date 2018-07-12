@@ -16,8 +16,16 @@ TARGET_INCLUDE_DIRECTORIES(
   ${MULTIRESOLUTIONIMAGEINTERFACE_BINARY_DIR}
   ${CORE_BINARY_DIR}
 )
-TARGET_COMPILE_DEFINITIONS(MultiResImageConverter PRIVATE -DBOOST_ALL_DYN_LINK)
-TARGET_LINK_LIBRARIES(MultiResImageConverter PRIVATE multiresolutionimageinterface core Boost::disable_autolinking Boost::program_options)
+# TARGET_COMPILE_DEFINITIONS(MultiResImageConverter PRIVATE -DBOOST_ALL_DYN_LINK)
+# TARGET_LINK_LIBRARIES(MultiResImageConverter PRIVATE multiresolutionimageinterface core Boost::disable_autolinking Boost::program_options)
+TARGET_LINK_LIBRARIES(MultiResImageConverter  multiresolutionimageinterface core  Boost::program_options)
+
+SET_TARGET_PROPERTIES(MultiResImageConverter PROPERTIES
+                      RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin
+					  RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin
+					#  PREFIX "./"
+					  DEBUG_POSTFIX "d"
+					  )
 
 INSTALL(
   TARGETS MultiResImageConverter
