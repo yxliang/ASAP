@@ -6,15 +6,15 @@
 
 class OPENSLIDEFILEFORMAT_EXPORT OpenSlideImageFactory : public MultiResolutionImageFactory {
 public:
-  OpenSlideImageFactory();
+	OpenSlideImageFactory();
 
 private:
-  MultiResolutionImage* readImage(const std::string& fileName) const;
-  bool canReadImage(const std::string& fileName) const;
+	MultiResolutionImage* readImage(const std::string& fileName) const;
+	bool canReadImage(const std::string& fileName) const;
 };
 
 extern "C" {
-  OPENSLIDEFILEFORMAT_EXPORT void filetypeLoad();
+	OPENSLIDEFILEFORMAT_EXPORT void filetypeLoad();
 }
 
 #endif

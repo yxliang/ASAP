@@ -76,7 +76,7 @@ IF(WRAP_WHOLESLIDEFILTERS_PYTHON)
 	  include_directories(. ${PYTHON_INCLUDE_DIR} ${DIAGPathology_BINARY_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 	  SWIG_ADD_LIBRARY(wholeslidefilters LANGUAGE python SOURCES wholeslidefilters.i)
 	  SWIG_LINK_LIBRARIES(wholeslidefilters wholeslidefilters core) 
-	  SWIG_LINK_LIBRARIES(wholeslidefilters ${PYTHON_LIBRARIES} ${PYTHON_DEBUG_LIBRARIES})
+	  SWIG_LINK_LIBRARIES(wholeslidefilters ${PYTHON_LIBRARIES} ) #${PYTHON_DEBUG_LIBRARIES})
 	  
 	  SET_TARGET_PROPERTIES(${SWIG_MODULE_wholeslidefilters_REAL_NAME} PROPERTIES FOLDER pathology/diag/imgproc)
 	  SET_TARGET_PROPERTIES(${SWIG_MODULE_wholeslidefilters_REAL_NAME} PROPERTIES DEBUG_POSTFIX _d)
